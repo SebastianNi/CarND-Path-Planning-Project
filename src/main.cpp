@@ -181,6 +181,9 @@ vector<double> getXY(double s, double d, vector<double> maps_s, vector<double> m
 }
 
 double GetOptimalVelocity(double current_velocity, double reference_velocity) {
+  if(current_velocity > kReferenceVelocity)
+    // Make sure the car does not violate the speed limit
+    return kReferenceVelocity;
   if(abs(current_velocity - reference_velocity) < 0.45)
     // Adapt to the reference velocity but drive a little slower to regain some distance again
     return reference_velocity - 0.1;
