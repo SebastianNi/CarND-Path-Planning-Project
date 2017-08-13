@@ -10,6 +10,29 @@ Each waypoint in the list contains  [x,y,s,dx,dy] values. x and y are the waypoi
 
 The highway's waypoints loop around so the frenet s value, distance along the road, goes from 0 to 6945.554.
 
+## Rubric Points and Model Documentation
+
+### The car is able to drive at least 4.32 miles without incident
+The car drives around the whole track by itself just using the path planning model. The result can be watched in this [video](https://drive.google.com/open?id=0B0agIiDyIPj1QnVCeDNETWRXREU).
+
+### The car drives according to the speed limit
+The reference velocity in this model is set to 49.5 mph. The velocity is limited to the reference velocity but can be decreased when the car get stuck in traffic without a safe option to change to a faster lane. The function GetOptimalVelocity handles the speed of the car and takes care of the speed limit.
+
+### Max Acceleration and Jerk are not Exceeded
+The function GetOptimalVelocity takes care of the acceleration and the deceleration of the car. It accelerates or decelerates the car by maximal 0.45 mph per timestep.
+
+### Car does not have collisions
+The car changes the lane if a car appears in front of it. If it does not find a safe way to change the lane, it starts to slow down to a little lower velocity then the car in front of it. Since the car in front of our car might slow down at any time, it is good to gain some safe distance.
+
+### The car stays in its lane, except for the time between changing lanes
+The map has 181 waypoints which lead along the middle of the road. The only interesting lanes for our car are situated in the right side of the waypoints and each lane is 4 meters wide. The car follows the waypoints of the map around the track with an offset of either 2m, 6m or 10m to the right. The math is done by converting the Cartesian (x,y) coordinates to Frenet (s,d) coordinates. The s value describes the way along the center of the road and the d value describes the offset to the roads center.
+
+### The car is able to change lanes
+The car tries to drive in the lane with the lowest traffic. It will start to search for the optimal lane as soon as another car in the same lane appears less than 100 meters before our car. The car will stay in its current lane if the other lanes do not have less traffic. If a lane with less traffic exists, however, the car will check if the lane next to its position is safe to drive. If that is the case, it will switch the lane. A lane is considered safe if no other car is driving about ten meters or less behind or about 30 meters or less before our car's position.
+
+### Reflection on how to generate paths
+
+
 ## Basic Build Instructions
 
 1. Clone this repo.
