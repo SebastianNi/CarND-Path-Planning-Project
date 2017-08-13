@@ -19,7 +19,7 @@ The car drives around the whole track by itself just using the path planning mod
 The reference velocity in this model is set to 49.5 mph. The velocity is limited to the reference velocity but can be decreased when the car get stuck in traffic without a safe option to change to a faster lane. The function GetOptimalVelocity handles the speed of the car and takes care of the speed limit.
 
 ### Max Acceleration and Jerk are not Exceeded
-The function GetOptimalVelocity takes care of the acceleration and the deceleration of the car. It accelerates or decelerates the car by maximal 0.45 mph per timestep.
+The function GetOptimalVelocity takes care of the acceleration and the deceleration of the car. It accelerates or decelerates the car by maximal 0.45 mph per timestep. A spline function, which passes through waypoints with distances of 30 meters between them, makes sure the maximal jerk it not exceeded.
 
 ### Car does not have collisions
 The car changes the lane if a car appears in front of it. If it does not find a safe way to change the lane, it starts to slow down to a little lower velocity then the car in front of it. Since the car in front of our car might slow down at any time, it is good to gain some safe distance.
@@ -31,7 +31,7 @@ The map has 181 waypoints which lead along the middle of the road. The only inte
 The car tries to drive in the lane with the lowest traffic. It will start to search for the optimal lane as soon as another car in the same lane appears less than 100 meters before our car. The car will stay in its current lane if the other lanes do not have less traffic. If a lane with less traffic exists, however, the car will check if the lane next to its position is safe to drive. If that is the case, it will switch the lane. A lane is considered safe if no other car is driving about ten meters or less behind or about 30 meters or less before our car's position.
 
 ### Reflection on how to generate paths
-
+The path generation starts with defining a reference point to start (or go on) with the path. This reference point is either the cars position (if no previous path exists) or the end of the previous path. Together with the predecessor of the reference point, the angle for the current heading of the path is calculated. Three additional points are added to the trajectory with 30 meters distance between each of them. Then the points are shifted and rotated so that the reference point lies in the center of the coordinate system and the tangent through the reference point leads along the x axis. After that, a spline which leads through all five points is calculated to interpolate all necessary points for the trajectory. The path should consist of 50 points. All previous path points are kept and added to the new path. The rest of the path is filled up by new points from the spline. In the last step, the path points are shifted and rotated back to the original coordinate system.
 
 ## Basic Build Instructions
 
