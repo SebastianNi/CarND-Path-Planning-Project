@@ -19,7 +19,7 @@ The highway's waypoints loop around so the frenet s value, distance along the ro
 ## Rubric Points and Model Documentation
 
 ### The car is able to drive at least 4.32 miles without incident
-The car drives around the whole track by itself just using the path planning model. The result can be watched in this [video](https://drive.google.com/open?id=0B0agIiDyIPj1QnVCeDNETWRXREU).
+The car drives around the whole track by itself just using the path planning model. The result can be watched in this [video](https://youtu.be/FCqII9czg8I).
 
 ### The car drives according to the speed limit
 The reference velocity in this model is set to 49.5 mph. The velocity is limited to the reference velocity but can be decreased when the car get stuck in traffic without a safe option to change to a faster lane. The function GetOptimalVelocity handles the speed of the car and takes care of the speed limit.
