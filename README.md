@@ -1,7 +1,7 @@
 # CarND-Path-Planning-Project
 Self-Driving Car Engineer Nanodegree Program
 
-The result of the path planner can be seen in this [video](https://drive.google.com/open?id=0B0agIiDyIPj1QnVCeDNETWRXREU).
+The result of the path planner can be seen in this [video](https://youtu.be/FCqII9czg8I).
 
 <img src="path_planning.png" width="900" alt="Combined Image" />
 
